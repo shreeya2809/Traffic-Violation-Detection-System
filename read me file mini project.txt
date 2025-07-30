@@ -1,0 +1,26 @@
+#  Traffic Violation Detection System
+
+A computer vision system that detects:
+
+-  Helmet violations  
+-  Triple riding on two-wheelers  
+-  License plate numbers (via EasyOCR)
+
+Built with **YOLOv5** for object detection and **EasyOCR** for number plate recognition. Useful for smart traffic surveillance and automated monitoring.
+
+##  Tech Stack
+
+- Python
+- YOLOv5
+- OpenCV
+- EasyOCR
+- Django (optional)
+
+##  How to Run
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Run detection
+python detect.py --source path/to/video_or_image
