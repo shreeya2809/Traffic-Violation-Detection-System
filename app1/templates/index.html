@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Traffic Violation Detection</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: url('/media/mini5.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 60px auto;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 40px;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+
+    h1, h2 {
+      text-align: center;
+      font-weight: 600;
+    }
+
+    form {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    input[type="file"] {
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 8px;
+      background-color: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: none;
+      width: 100%;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 25px;
+      font-size: 16px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    .results {
+      margin-top: 30px;
+    }
+
+    .results img {
+      width: 100%;
+      max-width: 100%;
+      border-radius: 8px;
+      margin-top: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .ocr-text {
+      margin-top: 25px;
+      background-color: rgba(76, 175, 80, 0.2);
+      border-left: 5px solid #4caf50;
+      padding: 15px;
+      border-radius: 8px;
+      color: #fff;
+    }
+
+    .ocr-text ul {
+      padding-left: 20px;
+    }
+
+    .ocr-text li {
+      margin-bottom: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🚦 Traffic Violation Detection</h1>
+
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <input type="file" name="upload" accept="image/*,video/*" required>
+      <br>
+      <button type="submit">Detect Violations</button>
+    </form>
+
+    {% if helmet_img %}
+    <div class="results">
+      <h2>🪖 Helmet Detection</h2>
+      <img src="{{ MEDIA_URL }}{{ helmet_img }}" alt="Helmet Detection">
+    </div>
+    {% endif %}
+
+    {% if triple_img %}
+    <div class="results">
+      <h2>👥 Triple Seat Detection</h2>
+      <img src="{{ MEDIA_URL }}{{ triple_img }}" alt="Triple Seat Detection">
+    </div>
+    {% endif %}
+
+    {% if number_img %}
+    <div class="results">
+      <h2>📸 Number Plate Detection</h2>
+      <img src="{{ MEDIA_URL }}{{ number_img }}" alt="Number Plate Detection">
+    </div>
+    {% endif %}
+
+    {% if ocr_results %}
+    <div class="ocr-text">
+      <h2>🔍 Detected Number Plate(s)</h2>
+      <ul>
+        {% for text in ocr_results %}
+          <li>{{ text }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  </div>
+</body>
+</html>

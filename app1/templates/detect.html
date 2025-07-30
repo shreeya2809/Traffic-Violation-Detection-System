@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Upload Image for Detection</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #f8f9fa, #e0c3fc, #8ec5fc);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      animation: fadeInBody 1s ease-in-out;
+    }
+
+    .card {
+      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      padding: 40px;
+      max-width: 450px;
+      width: 90%;
+      text-align: center;
+      animation: fadeInUp 0.6s ease-in-out;
+    }
+
+    h2 {
+      margin-bottom: 25px;
+      color: #222;
+      font-size: 26px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    input[type="file"] {
+      padding: 12px;
+      font-size: 15px;
+      border: 2px dashed #aaa;
+      border-radius: 10px;
+      background-color: #fff;
+      transition: 0.3s ease;
+      cursor: pointer;
+    }
+
+    input[type="file"]:hover {
+      border-color: #7b2cbf;
+    }
+
+    button {
+      padding: 12px;
+      background: linear-gradient(to right, #7b2cbf, #9d4edd);
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, #5a189a, #7b2cbf);
+    }
+
+    .note {
+      margin-top: 12px;
+      font-size: 13px;
+      color: #555;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInBody {
+      from {
+        opacity: 0;
+        background-position: 0% 50%;
+      }
+      to {
+        opacity: 1;
+        background-position: 100% 50%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>🚦 Upload Image for Traffic Violation Detection</h2>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <input type="file" name="image" accept="image/*" required>
+      <button type="submit">🚨 Detect Violations</button>
+    </form>
+    <p class="note">Supported formats: .jpg, .jpeg, .png</p>
+  </div>
+</body>
+</html>

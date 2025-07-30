@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detection Result</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #dbeafe, #e0f2fe); /* Light Blue Gradient */
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .result-card {
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+            padding: 35px 50px;
+            max-width: 700px;
+            width: 90%;
+            text-align: center;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        h2 {
+            font-size: 28px;
+            color: #2c3e50;
+            margin-bottom: 25px;
+        }
+
+        img {
+            width: 85%;
+            max-width: 520px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: left;
+            margin: 0 auto;
+            max-width: 500px;
+        }
+
+        ul > li {
+            font-size: 17px;
+            margin-bottom: 12px;
+            color: #34495e;
+        }
+
+        ul li ul {
+            margin-left: 25px;
+            list-style-type: circle;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 25px;
+            background-color: #60a5fa;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #3b82f6;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                background-color: #ffffff;
+            }
+            to {
+                background: linear-gradient(to right, #dbeafe, #e0f2fe);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="result-card">
+        <h2>🔍 Detection Result</h2>
+        <img src="/media/{{ result_image }}" alt="Detection Result">
+
+        <ul>
+            <li>🪖 <strong>Helmet Detections:</strong> {{ helmet_count }}</li>
+            <li>👥 <strong>Triple Seat Detections:</strong> {{ triple_count }}</li>
+            <li>🔢 <strong>Number Plates Detected:</strong>
+                <ul>
+                    {% for plate in plates %}
+                        <li>{{ plate }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        </ul>
+
+        <a href="/">← Upload Another Image</a>
+    </div>
+</body>
+</html>
